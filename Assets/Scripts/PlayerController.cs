@@ -10,6 +10,14 @@ public class PlayerController : MonoBehaviour
 	private float angleSpeed;
 
 
+
+
+	[SerializeField]
+	private int currentLifeOfPlayer = 3;
+
+
+	public float Speed { get { return speed; } }
+
 	private Rigidbody playerBody;
 	private int currentAngle;
 	// Start is called before the first frame update
@@ -53,6 +61,28 @@ public class PlayerController : MonoBehaviour
 	{
 		Debug.Log("MoveRight called");
 		transform.Rotate(Vector3.up * angleSpeed * Time.deltaTime);
+	}
+
+
+
+	public void ReduceEnemyLife()
+	{
+		currentLifeOfPlayer--;
+		if (currentLifeOfPlayer <= 0)
+		{
+			Debug.Log("Players game Over");
+			gameObject.SetActive(false);
+		}
+
+	}
+
+	public void OnTriggerEnter(Collider other)
+	{
+		if (other.CompareTag("Enemy"))
+		{
+			ReduceEnemyLife();//ReduceLife
+			other.GetComponent<EnemyDamage>().ReduceEnemyLife();
+		}
 	}
 
 

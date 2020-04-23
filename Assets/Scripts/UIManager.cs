@@ -15,7 +15,11 @@ public class UIManager : MonoBehaviour
 	private float timerVal;
 
 
-	public int Score { get { return Score; } set { Score = value; } }
+	public int Score
+	{
+		get;
+		set;
+	}
 
 	private void Awake()
 	{

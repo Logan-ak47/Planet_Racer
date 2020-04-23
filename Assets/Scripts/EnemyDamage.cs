@@ -73,10 +73,11 @@ public class EnemyDamage : MonoBehaviour
 		else
 		if (enemyRemainingLife <= 0)
 		{
+			gameObject.SetActive(false);
 			EnemySpawner.instance.CurrentPoliceCar--;
-			GameObject explosion = ObjectPooling.instance.GetPooledObject("Explosion");
-			explosion.SetActive(true);
-			explosion.transform.position = this.transform.position;
+			//GameObject explosion = ObjectPooling.instance.GetPooledObject("Explosion");
+			//explosion.SetActive(true);
+			//explosion.transform.position = this.transform.position;
 			//Instantiate(explosionEffect, transform.position, Quaternion.identity);
 			Debug.Log("It Ends Here");//Deactivate the Object and Destroy it as The Enemy Has Lost its Life
 		}

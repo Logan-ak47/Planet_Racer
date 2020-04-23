@@ -16,7 +16,8 @@ public class EnemyScript : MonoBehaviour
 	void Start()
     {
 		myBody = GetComponent<Rigidbody>();
-    }
+		target= GameObject.FindGameObjectWithTag("Player");
+	}
 
 	private void FixedUpdate()
 	{

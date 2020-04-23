@@ -40,7 +40,7 @@ public class EnemySpawner : MonoBehaviour
 
 		MilestoneIncreaser();                                       //increase milestone
 
-		if (currentPoliceCar < policeCarRequired)                   //if currentPoliceCar is less than policeCarRequired
+		if (currentPoliceCar <= policeCarRequired)                   //if currentPoliceCar is less than policeCarRequired
 		{
 			SpawnPoliceCar();                                       //spawn police car
 		}
@@ -77,6 +77,7 @@ public class EnemySpawner : MonoBehaviour
 
 		while (lastPosition == r)
 			r = Random.Range(0, spawnPos.Length);
+		Debug.Log("the position chosen is " + r);
 	}
 
 }
