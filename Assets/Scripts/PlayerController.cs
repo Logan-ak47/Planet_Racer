@@ -9,7 +9,8 @@ public class PlayerController : MonoBehaviour
 	[SerializeField]
 	private float angleSpeed;
 
-
+	[SerializeField]
+	private GameObject MenuPanel;
 
 
 	[SerializeField]
@@ -36,7 +37,14 @@ public class PlayerController : MonoBehaviour
 	{
 		if (Input.GetMouseButton(0))
 		{
-			
+			if (MenuPanel.activeSelf == true)
+			{
+				Debug.Log("game started");
+				MenuPanel.SetActive(false);
+				UIManager.instance.isGameStarted = true;
+				UIManager.instance.gamePanel.SetActive(true);
+			}
+
 
 			float x = Input.mousePosition.x;
 			if(x < Screen.width/2 && x > 0)
@@ -68,8 +76,11 @@ public class PlayerController : MonoBehaviour
 	public void ReduceEnemyLife()
 	{
 		currentLifeOfPlayer--;
+
+		UIManager.instance.ReduceLife(currentLifeOfPlayer);
 		if (currentLifeOfPlayer <= 0)
 		{
+			UIManager.instance.GameOver();
 			Debug.Log("Players game Over");
 			gameObject.SetActive(false);
 		}

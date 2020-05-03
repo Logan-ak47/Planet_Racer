@@ -32,24 +32,45 @@ public class EnemySpawner : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		if (target == null)                                         //if target is null
+
+		if (UIManager.instance.isGameStarted == false || UIManager.instance.isGameOver == true)
 		{
-			target = GameObject.FindGameObjectWithTag("Player");    //try detecting target again
-			return;                                                 //return from the method
+			return;
 		}
-
-		MilestoneIncreaser();                                       //increase milestone
-
-		if (currentPoliceCar <= policeCarRequired)                   //if currentPoliceCar is less than policeCarRequired
+		else
 		{
-			SpawnPoliceCar();                                       //spawn police car
+			if (target == null)                                         //if target is null
+			{
+				target = GameObject.FindGameObjectWithTag("Player");    //try detecting target again
+				return;                                                 //return from the method
+			}
+
+			MilestoneIncreaser();                                       //increase milestone
+
+			if (currentPoliceCar <= policeCarRequired)                   //if currentPoliceCar is less than policeCarRequired
+			{
+				SpawnPoliceCar();                                       //spawn police car
+			}
 		}
 
 	}
-
+	string EnemyToSpawn;
 	void SpawnPoliceCar()                                           //spawn police car
 	{
-		GameObject policeCar = ObjectPooling.instance.GetPooledObject("Enemy");     //get police car reference from objectpooling
+		
+
+		//int numberToChooseEnemyToSpawn = Random.Range(0, 2);
+		//if (numberToChooseEnemyToSpawn % 2 == 0)
+		//{
+		//	EnemyToSpawn = "Enemy_2";
+		//}
+		//else
+		//{
+		//	EnemyToSpawn = "Enemy";
+		//}
+
+		EnemyToSpawn = "Enemy_2";
+		GameObject policeCar = ObjectPooling.instance.GetPooledObject(EnemyToSpawn);     //get police car reference from objectpooling
 		RandomPos();
 
 		policeCar.transform.position = new Vector3(spawnPos[r].position.x, 0, spawnPos[r].position.z);  //set the transform
